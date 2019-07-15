@@ -73,12 +73,15 @@
     </ApplicationDefinition>
     <Compile Include="Event\OpenDtlViewEvent.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
+    <Compile Include="ViewModel\DetailViewModelBase.cs" />
+    <Compile Include="ViewModel\EmployeeDetailViewModel.cs" />
     <Compile Include="ViewModel\IDetailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\EmployeeListView.xaml.cs">
       <DependentUpon>EmployeeListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wrapper\EmployeesWrapper.cs" />
     <Compile Include="Wrapper\ModelWrapper.cs" />
     <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
     <Page Include="MainWindow.xaml">
@@ -131,6 +134,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\twitter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NDC.DataAccess\NDC.DataAccess.csproj">
+      <Project>{219f0257-a72b-4fb4-aeee-d68c58d67ebc}</Project>
+      <Name>NDC.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDC.Model\NDC.Model.csproj">
+      <Project>{5bfca758-d956-43bc-a8b6-cab0884a6cf1}</Project>
+      <Name>NDC.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,17 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Purchase.UI.Event;
+using Autofac.Features.Indexed;
 
 namespace NDC.UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel()
+        private readonly IIndex<string, IDetailViewModel> _detailViewModelCreator;
+
+        public MainViewModel(IIndex<string, IDetailViewModel> detailViewModelCreator)
         {
+            _detailViewModelCreator = detailViewModelCreator;
+
+
             OpenSingleDetailViewCommand = new DelegateCommand<Type>(OnOpenSingleDetailViewExecute);
         }
 
-        
+
 
         public ICommand OpenSingleDetailViewCommand { get; }
         //Para poder ter tabs
@@ -30,11 +36,31 @@ namespace NDC.UI.ViewModel
             OnOpenDetailView(new OpenDtlViewEventArgs { Id = -1, ViewModelName = viewModelType.Name });
         }
 
-        private void OnOpenDetailView(OpenDtlViewEventArgs openDtlViewEventArgs)
+        private async void OnOpenDetailView(OpenDtlViewEventArgs args)
         {
-            throw new NotImplementedException();
+            var detailViewModel = DetailViewModels.SingleOrDefault(vm => vm.Id == args.Id
+            && vm.GetType().Name == args.ViewModelName);
+
+            if (detailViewModel == null)
+            {
+                detailViewModel = _detailViewModelCreator[args.ViewModelName];
+
+                try
+                {
+
+                    await detailViewModel.LoadAsync(args.Id);
+                    //Adicionado à lista de tabs
+                    DetailViewModels.Add(detailViewModel);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                
+            }
         }
     }
 
-    
+
 }
