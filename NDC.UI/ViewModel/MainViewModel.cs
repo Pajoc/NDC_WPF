@@ -15,11 +15,11 @@ namespace NDC.UI.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly IIndex<string, IDetailViewModel> _detailViewModelCreator;
-
+        private IDetailViewModel _selecteddetailViewModel;
         public MainViewModel(IIndex<string, IDetailViewModel> detailViewModelCreator)
         {
             _detailViewModelCreator = detailViewModelCreator;
-
+            DetailViewModels = new ObservableCollection<IDetailViewModel>();
 
             OpenSingleDetailViewCommand = new DelegateCommand<Type>(OnOpenSingleDetailViewExecute);
         }
@@ -30,7 +30,16 @@ namespace NDC.UI.ViewModel
         //Para poder ter tabs
         public ObservableCollection<IDetailViewModel> DetailViewModels { get; }
 
-
+        //Passa a ser usado para o detailVM selecionado
+        public IDetailViewModel SelectedDetailViewModel
+        {
+            get { return _selecteddetailViewModel; }
+            set
+            {
+                _selecteddetailViewModel = value;
+                OnpropertyChanged();
+            }
+        }
         private void OnOpenSingleDetailViewExecute(Type viewModelType)
         {
             OnOpenDetailView(new OpenDtlViewEventArgs { Id = -1, ViewModelName = viewModelType.Name });
@@ -51,6 +60,8 @@ namespace NDC.UI.ViewModel
                     await detailViewModel.LoadAsync(args.Id);
                     //Adicionado à lista de tabs
                     DetailViewModels.Add(detailViewModel);
+
+                    SelectedDetailViewModel = detailViewModel;
                 }
                 catch (Exception)
                 {

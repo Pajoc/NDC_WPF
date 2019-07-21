@@ -6,8 +6,18 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:NDC.UI"
         xmlns:view="clr-namespace:NDC.UI.View"
+        xmlns:viewModel="clr-namespace:NDC.UI.ViewModel"
         mc:Ignorable="d"
         Title="Calculation Notes" Height="700" Width="1000">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:EmployeeDetailViewModel}">
+            <view:EmployeeListView/>
+        </DataTemplate>
+
+    </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,9 +30,10 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.ColumnSpan="2" FontSize="20">
             <MenuItem Header="Tables">
-                <MenuItem Header="Clients" Command="{Binding CreateNewDetailCommand}"/>
-                <MenuItem Header="Sites" Command="{Binding CreateNewDetailCommand}"/>
-                <MenuItem Header="Users" Command="{Binding CreateNewDetailCommand}"/>
+                <MenuItem Header="Clients" />
+                <MenuItem Header="Sites" />
+                <MenuItem Header="Users" Command="{Binding OpenSingleDetailViewCommand}"
+                          CommandParameter="{x:Type viewModel:EmployeeDetailViewModel}"/>
             </MenuItem>
             <MenuItem Header="Notes">
                 <MenuItem Header="New Note" Command="{Binding OpenSingleDetailViewCommand}"/>
