@@ -9,22 +9,26 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Purchase.UI.Event;
 using Autofac.Features.Indexed;
+using Prism.Events;
 
 namespace NDC.UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly IEventAggregator _eventAggregator;
         private readonly IIndex<string, IDetailViewModel> _detailViewModelCreator;
         private IDetailViewModel _selecteddetailViewModel;
-        public MainViewModel(IIndex<string, IDetailViewModel> detailViewModelCreator)
+        public MainViewModel(IIndex<string, IDetailViewModel> detailViewModelCreator, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
+
             _detailViewModelCreator = detailViewModelCreator;
             DetailViewModels = new ObservableCollection<IDetailViewModel>();
 
+            _eventAggregator.GetEvent<AfterDetailClosedEvent>().Subscribe(AfterDetailClosed);
+
             OpenSingleDetailViewCommand = new DelegateCommand<Type>(OnOpenSingleDetailViewExecute);
         }
-
-
 
         public ICommand OpenSingleDetailViewCommand { get; }
         //Para poder ter tabs
@@ -69,6 +73,22 @@ namespace NDC.UI.ViewModel
                     throw;
                 }
                 
+            }
+        }
+        private void AfterDetailClosed(AfterDetailClosedDeletedEventArgs args)
+        {
+            RemoveDetailViewModel(args.Id, args.ViewModelName);
+        }
+
+        private void RemoveDetailViewModel(int id, string viewModelName)
+        {
+            //apanhar o tab para remover
+            var detailViewModel = DetailViewModels.SingleOrDefault(vm => vm.Id == id
+           && vm.GetType().Name == viewModelName);
+
+            if (detailViewModel != null)
+            {
+                DetailViewModels.Remove(detailViewModel);
             }
         }
     }

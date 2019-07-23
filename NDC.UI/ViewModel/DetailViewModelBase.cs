@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Events;
+using Purchase.UI.Event;
 using Purchase.UI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,13 @@ namespace NDC.UI.ViewModel
         public DetailViewModelBase(IEventAggregator eventAggregator)
         {
             EventAggregator = eventAggregator;
+            CloseDetailViewCommand = new DelegateCommand(OnCloseDetailViewExecute);
 
         }
 
         public abstract Task LoadAsync(int ID);
         public ICommand SaveCommand { get; private set; }
+        public ICommand CloseDetailViewCommand { get; }
 
         public int Id
         {
@@ -56,6 +59,16 @@ namespace NDC.UI.ViewModel
                     ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
                 }
             }
+        }
+
+        private void OnCloseDetailViewExecute()
+        {
+            EventAggregator.GetEvent<AfterDetailClosedEvent>()
+               .Publish(new AfterDetailClosedDeletedEventArgs
+               {
+                   Id = this.Id,
+                   ViewModelName = this.GetType().Name
+               });
         }
     }
 }

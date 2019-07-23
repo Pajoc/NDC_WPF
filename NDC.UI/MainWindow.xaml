@@ -59,7 +59,7 @@
                         <!-- tipos diferentes usar Ivalue converter-->
                         <TextBlock Text="*" Visibility="{Binding HasChanges,Converter={StaticResource booleanToVisibilityConverter}}"/>
                         <Button Command="{Binding CloseDetailViewCommand}"
-                                
+                                Style="{StaticResource ChromelessButtonStyle}"
                                 VerticalAlignment="Top" Margin="2 0 2 2" Content="X" FontSize="20"/>
 
                     </StackPanel>
