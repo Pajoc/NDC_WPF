@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
-namespace Purchase.UI.Wrapper
+namespace NDC.UI.Wrapper
 {
     public class ModelWrapper<T> : NotifyDataErrorInfoBase
     {

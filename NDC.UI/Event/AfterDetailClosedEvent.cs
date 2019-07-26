@@ -1,6 +1,6 @@
 ﻿using Prism.Events;
 
-namespace Purchase.UI.Event
+namespace NDC.UI.Event
 {
     public class AfterDetailClosedEvent : PubSubEvent<AfterDetailClosedDeletedEventArgs>
     {

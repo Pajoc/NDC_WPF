@@ -1,4 +1,4 @@
-﻿using Purchase.UI.ViewModel;
+﻿using NDC.UI.ViewModel;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Purchase.UI.Event;
+using NDC.UI.Event;
 using Autofac.Features.Indexed;
 using Prism.Events;
 

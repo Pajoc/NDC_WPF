@@ -71,8 +71,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Repositories\EmployeeDataService.cs" />
-    <Compile Include="Data\Repositories\IEmployeeDataService.cs" />
+    <Compile Include="Data\EmployeeDataService.cs" />
+    <Compile Include="Data\IEmployeeDataService.cs" />
     <Compile Include="Event\AfterDetailClosedEvent.cs" />
     <Compile Include="Event\OpenDtlViewEvent.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />

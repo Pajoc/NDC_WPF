@@ -1,5 +1,5 @@
-﻿using Gest.Model;
-using Purchase.UI.Wrapper;
+﻿using NDC.Model;
+using NDC.UI.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;

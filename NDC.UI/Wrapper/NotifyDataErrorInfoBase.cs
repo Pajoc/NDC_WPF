@@ -1,4 +1,4 @@
-﻿using Purchase.UI.ViewModel;
+﻿using NDC.UI.ViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Purchase.UI.Wrapper
+namespace NDC.UI.Wrapper
 {
     public class NotifyDataErrorInfoBase : ViewModelBase, INotifyDataErrorInfo
     {

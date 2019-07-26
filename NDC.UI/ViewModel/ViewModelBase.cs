@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Purchase.UI.ViewModel
+namespace NDC.UI.ViewModel
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

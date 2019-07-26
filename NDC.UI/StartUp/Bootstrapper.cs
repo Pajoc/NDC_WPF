@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using NDC.Model;
+using NDC.UI.Data;
 using NDC.UI.ViewModel;
 using Prism.Events;
-using Purchase.UI.ViewModel;
+//using NDC.UI.ViewModel;
 
 namespace NDC.UI.StartUp
 {
@@ -17,6 +19,8 @@ namespace NDC.UI.StartUp
             builder.RegisterType<MainViewModel>().AsSelf();
 
             builder.RegisterType<EmployeeDetailViewModel>().Keyed<IDetailViewModel>(nameof(EmployeeDetailViewModel));
+
+            builder.RegisterType<EmployeeDataService>().As<IEmployeeDataService>();
 
 
             

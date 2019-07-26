@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Purchase.UI.ViewModel
+namespace NDC.UI.ViewModel
 {
     public interface IDetailViewModel
     {

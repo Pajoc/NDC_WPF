@@ -1,7 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Events;
-using Purchase.UI.Event;
-using Purchase.UI.ViewModel;
+using NDC.UI.Event;
+using NDC.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

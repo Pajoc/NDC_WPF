@@ -1,4 +1,5 @@
-﻿using NDC.UI.Wrapper;
+﻿using NDC.UI.Data;
+using NDC.UI.Wrapper;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,32 @@ namespace NDC.UI.ViewModel
     public class EmployeeDetailViewModel : DetailViewModelBase
     {
         //private SupplierTypeWrapper _selectecSupplierType;
+        private IEmployeeDataService _employeeDS;
 
-        public EmployeeDetailViewModel(IEventAggregator eventAggregator): base (eventAggregator)
+        public EmployeeDetailViewModel(IEventAggregator eventAggregator, IEmployeeDataService employeeDS) : base (eventAggregator)
         {
             Title = "Employees";
+            _employeeDS = employeeDS;
+
             Employees = new ObservableCollection<EmployeesWrapper>();
         }
+
+        
 
         public ObservableCollection<EmployeesWrapper> Employees { get; }
 
         public async override Task LoadAsync(int id)
         {
             Id = id;
+
+            var employees = await _employeeDS.GetAllAsync();
+
+            foreach (var item in employees)
+            {
+                var wemp = new EmployeesWrapper(item);
+                //TODO: changed
+                Employees.Add(wemp);
+            }
 
         }
     }
