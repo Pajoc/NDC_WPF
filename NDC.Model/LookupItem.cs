@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gest.Model
+namespace NDC.Model
 {
     public class LookupItem
     {

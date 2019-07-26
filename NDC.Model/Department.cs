@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-namespace Gest.Model
+namespace NDC.Model
 {
     public class Department
     {
