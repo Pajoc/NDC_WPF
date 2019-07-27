@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NDC.UI.ViewModel
 {
-    public class EmployeeDetailViewModel : DetailViewModelBase
+    public class EmployeeDetailViewModel : DetailViewModelBase, IDetailViewModel
     {
         //private SupplierTypeWrapper _selectecSupplierType;
         private IEmployeeDataService _employeeDS;
@@ -23,7 +23,6 @@ namespace NDC.UI.ViewModel
             Employees = new ObservableCollection<EmployeesWrapper>();
         }
 
-        
 
         public ObservableCollection<EmployeesWrapper> Employees { get; }
 
@@ -35,6 +34,7 @@ namespace NDC.UI.ViewModel
 
             foreach (var item in employees)
             {
+                item.IsActive = item.IsActive != null ? item.IsActive : false;
                 var wemp = new EmployeesWrapper(item);
                 //TODO: changed
                 Employees.Add(wemp);

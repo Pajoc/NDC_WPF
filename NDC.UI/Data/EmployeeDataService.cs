@@ -15,12 +15,13 @@ namespace NDC.UI.Data
             _employeeDA = employeeDA;
         }
 
+
         public async Task<IEnumerable<Employee>> GetAllAsync()
         {
             //return await _employeeDA.GetAllAsync(new Employee());
-            var it1 = new Employee { Id = new Guid(), Name = "Paulo Costa" };
-            var it2 = new Employee { Id = new Guid(), Name = "Leonor Costa" };
-            var it3 = new Employee { Id = new Guid(), Name = "Odete Costa" };
+            var it1 = new Employee { Id = new Guid(), Code="PJC", Name = "Paulo Costa", IsActive = true , DepartmentOfEmployee = new Department { Id = new Guid(), Description = "IT"} };
+            var it2 = new Employee { Id = new Guid(), Code="LPC", Name = "Leonor Costa", IsActive = true, DepartmentOfEmployee = new Department { Id = new Guid(), Description = "Medical staff" } };
+            var it3 = new Employee { Id = new Guid(), Code="OPC", Name = "Odete Costa" };
             var list = new List<Employee>();
             list.Add(it1);
             list.Add(it2);

@@ -15,7 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
                 <ResourceDictionary>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="FontSize" Value="12"/>
                     </Style>
                     <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
                         <Setter Property="FontSize" Value="20"/>

@@ -47,6 +47,24 @@ namespace NDC.UI.Wrapper
                 SetValue(value);
             }
         }
+
+        public bool IsActive
+        {
+            get { return GetValue<bool>(); }
+            set
+            {
+                SetValue(value);
+            }
+        }
+
+        public Department DepartmentOfEmployee
+        {
+            get { return GetValue<Department>(); }
+            set
+            {
+                SetValue(value);
+            }
+        }
     }
 
 }

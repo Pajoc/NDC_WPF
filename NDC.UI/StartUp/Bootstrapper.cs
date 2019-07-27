@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Gest.DataAccess;
+using NDC.DataAccess;
 using NDC.Model;
 using NDC.UI.Data;
 using NDC.UI.ViewModel;
@@ -21,9 +23,9 @@ namespace NDC.UI.StartUp
             builder.RegisterType<EmployeeDetailViewModel>().Keyed<IDetailViewModel>(nameof(EmployeeDetailViewModel));
 
             builder.RegisterType<EmployeeDataService>().As<IEmployeeDataService>();
+            builder.RegisterType<WebServiceDataAccess<Employee>>().As<IDataAccess<Employee>>();
 
 
-            
             return builder.Build();
         }
     }
