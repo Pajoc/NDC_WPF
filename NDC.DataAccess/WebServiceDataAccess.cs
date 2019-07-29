@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gest.DataAccess
+namespace NDC.DataAccess
 {
     public class WebServiceDataAccess<T> : IDataAccess<T>
         where T : class
@@ -44,7 +44,6 @@ namespace Gest.DataAccess
 
         public async Task<IEnumerable<T>> GetAllAsync(T entity)
         {
-            
             var response = await _httpClient.GetAsync(entity.GetType().Name.ToLower());
             response.EnsureSuccessStatusCode();
             

@@ -43,7 +43,7 @@ namespace NDC.UI.ViewModel
             protected set
             {
                 _title = value;
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -55,7 +55,7 @@ namespace NDC.UI.ViewModel
                 if (_hasChanges != value)
                 {
                     _hasChanges = value;
-                    OnpropertyChanged();
+                    OnPropertyChanged();
                     ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
                 }
             }

@@ -41,7 +41,7 @@ namespace NDC.UI.ViewModel
             set
             {
                 _selecteddetailViewModel = value;
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
         private void OnOpenSingleDetailViewExecute(Type viewModelType)

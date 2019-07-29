@@ -73,6 +73,8 @@
     </ApplicationDefinition>
     <Compile Include="Data\EmployeeDataService.cs" />
     <Compile Include="Data\IEmployeeDataService.cs" />
+    <Compile Include="Data\Lookups\IDepartmentLookupDataService.cs" />
+    <Compile Include="Data\Lookups\LookupDataService.cs" />
     <Compile Include="Event\AfterDetailClosedEvent.cs" />
     <Compile Include="Event\OpenDtlViewEvent.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
@@ -131,9 +133,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Lookups\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\twitter.png" />
   </ItemGroup>

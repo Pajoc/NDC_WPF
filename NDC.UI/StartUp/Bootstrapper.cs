@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using Gest.DataAccess;
 using NDC.DataAccess;
 using NDC.Model;
 using NDC.UI.Data;
+using NDC.UI.Data.Lookups;
 using NDC.UI.ViewModel;
 using Prism.Events;
 //using NDC.UI.ViewModel;
@@ -25,6 +25,8 @@ namespace NDC.UI.StartUp
             builder.RegisterType<EmployeeDataService>().As<IEmployeeDataService>();
             builder.RegisterType<WebServiceDataAccess<Employee>>().As<IDataAccess<Employee>>();
 
+            builder.RegisterType<LookupDataService<Department>>().As<IDepartmentLookupDataService>();
+            builder.RegisterType<WebServiceDataAccess<Department>>().As<IDataReaderAccess<Department>>();
 
             return builder.Build();
         }

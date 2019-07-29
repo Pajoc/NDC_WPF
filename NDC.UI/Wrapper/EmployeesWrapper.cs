@@ -57,6 +57,25 @@ namespace NDC.UI.Wrapper
             }
         }
 
+        //public decimal Treshold { get; set; }
+        public decimal Treshold
+        {
+            get { return GetValue<decimal>(); }
+            set
+            {
+                SetValue(value);
+            }
+        }
+
+        public Guid? DepartmentId
+        {
+            get { return GetValue<Guid?>(); }
+            set
+            {
+                SetValue(value);
+            }
+        }
+
         public Department DepartmentOfEmployee
         {
             get { return GetValue<Department>(); }
