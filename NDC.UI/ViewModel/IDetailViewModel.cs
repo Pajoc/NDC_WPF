@@ -8,7 +8,7 @@ namespace NDC.UI.ViewModel
 {
     public interface IDetailViewModel
     {
-        Task LoadAsync(int ID);
+        Task LoadAsync(int ID, bool preLoad);
         bool HasChanges { get; }
         int Id { get; }//Identificador para o tab
     }

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NDC.UI.Data.Lookups;
+using System.Windows.Input;
+using Prism.Commands;
 
 namespace NDC.UI.ViewModel
 {
@@ -27,25 +29,43 @@ namespace NDC.UI.ViewModel
 
             Employees = new ObservableCollection<EmployeesWrapper>();
             Departments = new ObservableCollection<LookupItem>();
-        }
 
+            FilterCommand = new DelegateCommand(OnFilterExecuteAsync);
+        }
 
         public ObservableCollection<EmployeesWrapper> Employees { get; }
         public ObservableCollection<LookupItem> Departments { get; }
-        public async override Task LoadAsync(int id)
+
+        public ICommand FilterCommand { get; private set; }
+        //FilterCommand
+        public async override Task LoadAsync(int id, bool preLoad)
         {
             Id = id;
 
-            var employees = await _employeeDS.GetAllAsync();
-
-            foreach (var item in employees)
+            if (preLoad)
             {
-                item.IsActive = item.IsActive != null ? item.IsActive : false;
-                var wemp = new EmployeesWrapper(item);
-                //TODO: changed
-                Employees.Add(wemp);
+                var employees = await _employeeDS.GetAllAsync();
+
+                Employees.Clear();
+                foreach (var item in employees)
+                {
+                    item.IsActive = item.IsActive != null ? item.IsActive : false;
+                    var wemp = new EmployeesWrapper(item);
+                    //TODO: changed
+                    Employees.Add(wemp);
+                }
+                await LoadDepartmentLookupAsync();
             }
-            await LoadDepartmentLookupAsync();
+        }
+
+        public EmployeesWrapper SelectedEmployee
+        {
+            get { return _selectedEmployee; }
+            set
+            {
+                _selectedEmployee = value;
+                OnPropertyChanged();
+            }
         }
 
         private async Task LoadDepartmentLookupAsync()
@@ -58,15 +78,9 @@ namespace NDC.UI.ViewModel
                 Departments.Add(lookupItem);
             }
         }
-
-        public EmployeesWrapper SelectedEmployee
+        private async void OnFilterExecuteAsync()
         {
-            get { return _selectedEmployee; }
-            set
-            {
-                _selectedEmployee = value;
-                OnPropertyChanged();
-            }
+            await LoadAsync(Id, true);
         }
     }
 }

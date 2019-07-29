@@ -61,7 +61,7 @@ namespace NDC.UI.ViewModel
                 try
                 {
 
-                    await detailViewModel.LoadAsync(args.Id);
+                    await detailViewModel.LoadAsync(args.Id,false );
                     //Adicionado à lista de tabs
                     DetailViewModels.Add(detailViewModel);
 

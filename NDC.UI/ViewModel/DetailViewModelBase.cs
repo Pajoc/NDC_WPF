@@ -27,7 +27,7 @@ namespace NDC.UI.ViewModel
 
         }
 
-        public abstract Task LoadAsync(int ID);
+        public abstract Task LoadAsync(int ID, bool preLoad);
         public ICommand SaveCommand { get; private set; }
         public ICommand CloseDetailViewCommand { get; }
 
