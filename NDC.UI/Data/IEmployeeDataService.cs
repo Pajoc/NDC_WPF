@@ -7,7 +7,7 @@ namespace NDC.UI.Data
 {
     public interface IEmployeeDataService
     {
-        Task<IEnumerable<Employee>> GetAllAsync();
+        Task<IEnumerable<Employee>> GetAllAsync(Employee filter);
         Task<bool> RemoveEmployeeAsync(Guid id);
     }
 }

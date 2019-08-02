@@ -16,9 +16,12 @@ namespace NDC.UI.Data
         }
 
 
-        public async Task<IEnumerable<Employee>> GetAllAsync()
+        public async Task<IEnumerable<Employee>> GetAllAsync(Employee SearchEmployee)
         {
-            return await _employeeDA.GetAllAsync(new Employee());
+
+
+            //return await _employeeDA.GetAllAsync(new Employee());
+            return await _employeeDA.GetAllAsync(SearchEmployee);
 
             //var it1 = new Employee { Id = new Guid(), Code="PJC", Name = "Paulo Costa", IsActive = true , DepartmentOfEmployee = new Department { Id = new Guid(), Description = "IT"} };
             //var it2 = new Employee { Id = new Guid(), Code="LPC", Name = "Leonor Costa", IsActive = true, DepartmentOfEmployee = new Department { Id = new Guid(), Description = "Medical staff" } };

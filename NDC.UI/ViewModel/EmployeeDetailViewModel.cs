@@ -20,6 +20,7 @@ namespace NDC.UI.ViewModel
         private IEmployeeDataService _employeeDS;
         private IDepartmentLookupDataService _employeeTypeLookupDataService;
         private EmployeesWrapper _selectedEmployee;
+        private Employee _searchEmployee;
 
         public EmployeeDetailViewModel(IEventAggregator eventAggregator, IDepartmentLookupDataService employeeTypeLookupDataService, IEmployeeDataService employeeDS) : base (eventAggregator)
         {
@@ -31,6 +32,7 @@ namespace NDC.UI.ViewModel
             Departments = new ObservableCollection<LookupItem>();
 
             FilterCommand = new DelegateCommand(OnFilterExecuteAsync);
+            _searchEmployee = new Employee();
         }
 
         public ObservableCollection<EmployeesWrapper> Employees { get; }
@@ -44,7 +46,7 @@ namespace NDC.UI.ViewModel
 
             if (preLoad)
             {
-                var employees = await _employeeDS.GetAllAsync();
+                var employees = await _employeeDS.GetAllAsync(SearchEmployee);
 
                 Employees.Clear();
                 foreach (var item in employees)
@@ -68,6 +70,16 @@ namespace NDC.UI.ViewModel
             }
         }
 
+        public Employee SearchEmployee {
+
+            get { return _searchEmployee; }
+            set
+            {
+                _searchEmployee = value;
+                OnPropertyChanged();
+            }
+        }
+
         private async Task LoadDepartmentLookupAsync()
         {
             Departments.Clear();
@@ -80,7 +92,10 @@ namespace NDC.UI.ViewModel
         }
         private async void OnFilterExecuteAsync()
         {
+
             await LoadAsync(Id, true);
         }
+
+
     }
 }

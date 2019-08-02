@@ -34,7 +34,7 @@ namespace NDC.DataAccess
         //    return true;
         //}
 
-        HttpClient _httpClient = new HttpClient();
+        protected HttpClient _httpClient = new HttpClient();
 
         public WebServiceDataAccess()
         {
@@ -42,11 +42,11 @@ namespace NDC.DataAccess
             _httpClient.Timeout = new TimeSpan(0, 0, 30);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(T entity )
+        public virtual async Task<IEnumerable<T>> GetAllAsync(T entity )
         {
-
-            string pmts = "Code,LSI";
-            var response = await _httpClient.GetAsync(entity.GetType().Name.ToLower()+"/"+ pmts);
+            string pmts = "/GetAll";
+            var response = await _httpClient.GetAsync(entity.GetType().Name.ToLower()+ pmts);
+            
             response.EnsureSuccessStatusCode();
             
             var content = await response.Content.ReadAsStringAsync();

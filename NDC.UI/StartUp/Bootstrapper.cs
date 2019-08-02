@@ -23,7 +23,10 @@ namespace NDC.UI.StartUp
             builder.RegisterType<EmployeeDetailViewModel>().Keyed<IDetailViewModel>(nameof(EmployeeDetailViewModel));
 
             builder.RegisterType<EmployeeDataService>().As<IEmployeeDataService>();
-            builder.RegisterType<WebServiceDataAccess<Employee>>().As<IDataAccess<Employee>>();
+
+
+            //builder.RegisterType<WebServiceDataAccess<Employee>>().As<IDataAccess<Employee>>();
+            builder.RegisterType<EmployeeWServDataAccess>().As<IDataAccess<Employee>>();
 
             builder.RegisterType<LookupDataService<Department>>().As<IDepartmentLookupDataService>();
             builder.RegisterType<WebServiceDataAccess<Department>>().As<IDataReaderAccess<Department>>();
