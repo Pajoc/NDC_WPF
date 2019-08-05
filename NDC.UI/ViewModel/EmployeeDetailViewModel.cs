@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using NDC.UI.Data.Lookups;
 using System.Windows.Input;
 using Prism.Commands;
+using NDC.UI.View.Services;
 
 namespace NDC.UI.ViewModel
 {
@@ -21,8 +22,8 @@ namespace NDC.UI.ViewModel
         private IDepartmentLookupDataService _employeeTypeLookupDataService;
         private EmployeesWrapper _selectedEmployee;
         private Employee _searchEmployee;
-
-        public EmployeeDetailViewModel(IEventAggregator eventAggregator, IDepartmentLookupDataService employeeTypeLookupDataService, IEmployeeDataService employeeDS) : base (eventAggregator)
+        protected readonly IMessageDialogService MessageDialogService;
+        public EmployeeDetailViewModel(IEventAggregator eventAggregator, IDepartmentLookupDataService employeeTypeLookupDataService, IEmployeeDataService employeeDS, IMessageDialogService messageDialogService) : base (eventAggregator)
         {
             Title = "Employees";
             _employeeDS = employeeDS;
@@ -33,6 +34,9 @@ namespace NDC.UI.ViewModel
 
             FilterCommand = new DelegateCommand(OnFilterExecuteAsync);
             _searchEmployee = new Employee();
+
+            MessageDialogService = messageDialogService;
+
         }
 
         public ObservableCollection<EmployeesWrapper> Employees { get; }
@@ -96,6 +100,19 @@ namespace NDC.UI.ViewModel
             await LoadAsync(Id, true);
         }
 
+        public override async void OnDeleteExecute()
+        {
+            var result = await MessageDialogService.ShowOkCancelDialogAsync($"Do you really want to delete this supplier {_selectedEmployee.Name}?", "Question");
+            if (result == MessageDialogResult.OK)
+            {
+                await _employeeDS.RemoveEmployeeAsync(_selectedEmployee.Id);
+                await LoadAsync(Id, true);
+            }
+        }
 
+        protected override async void OnSaveExecute()
+        {
+            await _employeeDS.UpdateEmployeeAsync(_selectedEmployee);
+        }
     }
 }

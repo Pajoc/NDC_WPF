@@ -66,5 +66,13 @@ namespace NDC.DataAccess
             return true;
         }
 
+        public virtual Task<bool> UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public abstract Task<bool> UpdateAsync(T entity);
+
+
     }
 }

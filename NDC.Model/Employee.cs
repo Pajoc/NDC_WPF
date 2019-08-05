@@ -23,5 +23,7 @@ namespace NDC.Model
         public Guid? DepartmentId { get; set; }
 
         public Department DepartmentOfEmployee { get; set; }
+
+      
     }
 }

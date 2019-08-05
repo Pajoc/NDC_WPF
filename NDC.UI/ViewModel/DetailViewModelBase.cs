@@ -24,11 +24,13 @@ namespace NDC.UI.ViewModel
         {
             EventAggregator = eventAggregator;
             CloseDetailViewCommand = new DelegateCommand(OnCloseDetailViewExecute);
-
+            SaveCommand = new DelegateCommand(OnSaveExecute);
+            DeleteCommand = new DelegateCommand(OnDeleteExecute);
         }
 
         public abstract Task LoadAsync(int ID, bool preLoad);
         public ICommand SaveCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
         public ICommand CloseDetailViewCommand { get; }
 
         public int Id
@@ -61,6 +63,10 @@ namespace NDC.UI.ViewModel
             }
         }
 
+        public abstract void OnDeleteExecute();
+
+        protected abstract void OnSaveExecute();
+
         private void OnCloseDetailViewExecute()
         {
             EventAggregator.GetEvent<AfterDetailClosedEvent>()
@@ -70,5 +76,7 @@ namespace NDC.UI.ViewModel
                    ViewModelName = this.GetType().Name
                });
         }
+
+       
     }
 }

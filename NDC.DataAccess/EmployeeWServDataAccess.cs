@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,8 +34,22 @@ namespace NDC.DataAccess
             return returnedData;
         }
 
+        public override async Task<bool> UpdateAsync(Employee emp)
+        {
+            var serializedEmployeeToUpdate = JsonConvert.SerializeObject(emp);
 
+            var request = new HttpRequestMessage(HttpMethod.Put, emp.GetType().Name.ToLower() + "/" + emp.Id);
 
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serializedEmployeeToUpdate);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return true;
+        }
           
     }
 }

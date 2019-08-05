@@ -11,5 +11,7 @@ namespace NDC.UI.ViewModel
         Task LoadAsync(int ID, bool preLoad);
         bool HasChanges { get; }
         int Id { get; }//Identificador para o tab
+        void OnDeleteExecute();
+
     }
 }

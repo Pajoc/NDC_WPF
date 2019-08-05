@@ -3,6 +3,7 @@ using NDC.Model;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using NDC.UI.Wrapper;
 
 namespace NDC.UI.Data
 {
@@ -37,6 +38,12 @@ namespace NDC.UI.Data
         public async Task<bool> RemoveEmployeeAsync(Guid id)
         {
             return await _employeeDA.RemoveAsync(new Employee(), id);
+        }
+
+        public async Task<bool> UpdateEmployeeAsync(EmployeesWrapper emp)
+        {
+            return await _employeeDA.UpdateAsync(new Employee {Id = emp.Id, Code = emp.Code, Name = emp.Name, IsActive = emp.IsActive,
+                                                                MainEmail = emp.MainEmail, DepartmentId = emp.DepartmentId, Treshold = emp.Treshold });
         }
     }
 }

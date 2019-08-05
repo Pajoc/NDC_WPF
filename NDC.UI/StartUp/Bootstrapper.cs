@@ -3,6 +3,7 @@ using NDC.DataAccess;
 using NDC.Model;
 using NDC.UI.Data;
 using NDC.UI.Data.Lookups;
+using NDC.UI.View.Services;
 using NDC.UI.ViewModel;
 using Prism.Events;
 //using NDC.UI.ViewModel;
@@ -30,6 +31,10 @@ namespace NDC.UI.StartUp
 
             builder.RegisterType<LookupDataService<Department>>().As<IDepartmentLookupDataService>();
             builder.RegisterType<WebServiceDataAccess<Department>>().As<IDataReaderAccess<Department>>();
+
+            builder.RegisterType<MessageDialogService>().As<IMessageDialogService>();
+
+            
 
             return builder.Build();
         }
