@@ -50,6 +50,21 @@ namespace NDC.DataAccess
             var content = await response.Content.ReadAsStringAsync();
             return true;
         }
-          
+        public override async Task<bool> InsertAsync(Employee emp)
+        {
+            var serializedEmployeeToInsert = JsonConvert.SerializeObject(emp);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, emp.GetType().Name.ToLower());
+
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serializedEmployeeToInsert);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return true;
+        }
     }
 }

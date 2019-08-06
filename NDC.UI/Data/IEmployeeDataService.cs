@@ -11,5 +11,6 @@ namespace NDC.UI.Data
         Task<IEnumerable<Employee>> GetAllAsync(Employee filter);
         Task<bool> RemoveEmployeeAsync(Guid id);
         Task<bool> UpdateEmployeeAsync(EmployeesWrapper emp);
+        Task<bool> InsertEmployeeAsync(EmployeesWrapper emp);
     }
 }

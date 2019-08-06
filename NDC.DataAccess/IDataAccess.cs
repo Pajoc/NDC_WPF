@@ -7,6 +7,6 @@ namespace NDC.DataAccess
     {
         Task<bool> RemoveAsync(T entity, Guid guid);
         Task<bool> UpdateAsync(T entity);
-        
+        Task<bool> InsertAsync(T entity);
     }
 }

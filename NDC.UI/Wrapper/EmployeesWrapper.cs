@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NDC.UI.Wrapper
@@ -12,10 +13,12 @@ namespace NDC.UI.Wrapper
     {
         public EmployeesWrapper(Employee model) : base(model)
         {
-
+            
         }
 
-        public Guid Id { get { return GetValue<Guid>(); } }
+        public Guid Id {
+            get { return GetValue<Guid>(); }
+        }
 
         public string Name
         {
@@ -82,6 +85,28 @@ namespace NDC.UI.Wrapper
             set
             {
                 SetValue(value);
+            }
+        }
+
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
+        {
+            
+            switch (propertyName)
+            {
+                case nameof(Name):
+                    
+                    if (!Regex.IsMatch(Name, @"^[a-zA-Z âãäåçèéêìíîðñòóôõùúûü]+$"))
+                    {
+                        yield return "Letters only";
+                    }
+                    break;
+                case nameof(Code):
+                    
+                    if (!Regex.IsMatch(Code, @"^[a-zA-Z ]+$"))
+                    {
+                        yield return "Letters only";
+                    }
+                    break;
             }
         }
     }

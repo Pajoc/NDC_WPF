@@ -12,6 +12,6 @@ namespace NDC.UI.ViewModel
         bool HasChanges { get; }
         int Id { get; }//Identificador para o tab
         void OnDeleteExecute();
-
+        void OnAddNewDetailCommand();
     }
 }

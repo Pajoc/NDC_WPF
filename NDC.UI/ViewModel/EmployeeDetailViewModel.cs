@@ -96,8 +96,15 @@ namespace NDC.UI.ViewModel
         }
         private async void OnFilterExecuteAsync()
         {
-
-            await LoadAsync(Id, true);
+            try
+            {
+                await LoadAsync(Id, true);
+            }
+            catch (Exception ex )
+            {
+                await MessageDialogService.ShowInfoDialogAsync(ex.InnerException.ToString());
+            }
+           
         }
 
         public override async void OnDeleteExecute()
@@ -112,7 +119,26 @@ namespace NDC.UI.ViewModel
 
         protected override async void OnSaveExecute()
         {
-            await _employeeDS.UpdateEmployeeAsync(_selectedEmployee);
+            if (_selectedEmployee.Id ==  Guid.Empty)
+            {
+                await _employeeDS.InsertEmployeeAsync(_selectedEmployee);
+            }
+            else
+            {
+                await _employeeDS.UpdateEmployeeAsync(_selectedEmployee);
+            }
+            
+        }
+
+        public override void OnAddNewDetailCommand()
+        {
+            var wrapper = new EmployeesWrapper(new Employee());
+            wrapper.Treshold = 0;
+            wrapper.IsActive = false;
+            SelectedEmployee = wrapper;
+            SelectedEmployee.Name = "";
+            SelectedEmployee.Code = "";
+            
         }
     }
 }

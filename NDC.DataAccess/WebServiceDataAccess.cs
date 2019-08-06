@@ -70,7 +70,10 @@ namespace NDC.DataAccess
         {
             throw new NotImplementedException();
         }
-
+        public virtual Task<bool> InsertAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
         //public abstract Task<bool> UpdateAsync(T entity);
 
 

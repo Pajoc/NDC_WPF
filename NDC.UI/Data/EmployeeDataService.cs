@@ -35,6 +35,12 @@ namespace NDC.UI.Data
             //return list;
         }
 
+        public async Task<bool> InsertEmployeeAsync(EmployeesWrapper emp)
+        {
+            return await _employeeDA.InsertAsync(new Employee { Code = emp.Code, Name = emp.Name, IsActive = emp.IsActive,
+                MainEmail = emp.MainEmail, DepartmentId = emp.DepartmentId, Treshold = emp.Treshold });
+        }
+
         public async Task<bool> RemoveEmployeeAsync(Guid id)
         {
             return await _employeeDA.RemoveAsync(new Employee(), id);

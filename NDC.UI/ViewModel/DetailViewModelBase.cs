@@ -26,13 +26,14 @@ namespace NDC.UI.ViewModel
             CloseDetailViewCommand = new DelegateCommand(OnCloseDetailViewExecute);
             SaveCommand = new DelegateCommand(OnSaveExecute);
             DeleteCommand = new DelegateCommand(OnDeleteExecute);
+            AddNewDetailCommand = new DelegateCommand(OnAddNewDetailCommand);
         }
 
         public abstract Task LoadAsync(int ID, bool preLoad);
         public ICommand SaveCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         public ICommand CloseDetailViewCommand { get; }
-
+        public ICommand AddNewDetailCommand { get; }
         public int Id
         {
             get { return _id; }
@@ -64,6 +65,8 @@ namespace NDC.UI.ViewModel
         }
 
         public abstract void OnDeleteExecute();
+
+        public abstract void OnAddNewDetailCommand();
 
         protected abstract void OnSaveExecute();
 
